@@ -16,16 +16,16 @@ public class ServiceGithub {
         this.clientGitHub = clientGitHub;
     }
 
-     public Optional<Set<RepositoryGitHub>> findOther(String userName){
-         Set<RepositoryGitHub> githubRepos = clientGitHub.getRepoGit(userName).stream()
-                 .filter(r -> r.forkies()!=true)
+     public Optional<List<RepositoryGitHub>> findOther(String userName){
+         List<RepositoryGitHub> githubRepos = clientGitHub.getRepoGit(userName).stream()
+                 .filter(r -> !r.forkies())
                  .map(r -> {
                      String[] ownerAndReponame = r.name().split("/");
                      List<Branch> branches  = clientGitHub.getBranch(ownerAndReponame[0], ownerAndReponame[1]);
 
                      return new RepositoryGitHub(ownerAndReponame[1], ownerAndReponame[0], branches);
                  })
-                 .collect(Collectors.toSet());
+                 .collect(Collectors.toList());
          return Optional.ofNullable(githubRepos);
      }
 }

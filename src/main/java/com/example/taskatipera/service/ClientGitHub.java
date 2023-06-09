@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Service
-@FeignClient(name = "git-api",url = "https://api.github.com")
+@FeignClient(name = "github-api",url = "https://api.github.com")
 @Headers("Accept: application/json")
 public interface ClientGitHub {
 
@@ -19,5 +19,5 @@ public interface ClientGitHub {
     List<GitRepositoryDTO> getRepoGit(@PathVariable("userName")String userName);
 
     @GetMapping("/repos/{userName}/{repoName}/branches")
-    List<Branch> getBranch(@PathVariable("userName")String userName,@PathVariable("repositoryName")String repositoryName);
+    List<Branch> getBranch(@PathVariable("userName")String userName,@PathVariable("repoName")String repositoryName);
 }

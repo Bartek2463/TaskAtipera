@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -19,7 +20,7 @@ public class ControllerGitHub {
     }
 
     @GetMapping("/{userName}")
-    public Set<RepositoryGitHub> findAllRepository(@PathVariable("userName")String userName){
+    public List<RepositoryGitHub> findAllRepository(@PathVariable("userName")String userName){
         return serviceGithub.findOther(userName)
                 .orElseThrow(()->new RuntimeException());
     }
