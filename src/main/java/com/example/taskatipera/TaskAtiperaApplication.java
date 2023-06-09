@@ -1,5 +1,7 @@
 package com.example.taskatipera;
 
+import com.example.taskatipera.exception.CustomErrorDecoder;
+import feign.codec.ErrorDecoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +17,8 @@ public class TaskAtiperaApplication {
 		SpringApplication.run(TaskAtiperaApplication.class, args);
 	}
 
-
+      public ErrorDecoder errorDecoder(){
+		return  new CustomErrorDecoder();
+	  }
 
 }
