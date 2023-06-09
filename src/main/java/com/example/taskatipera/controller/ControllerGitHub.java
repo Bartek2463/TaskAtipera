@@ -1,5 +1,7 @@
 package com.example.taskatipera.controller;
 
+import com.example.taskatipera.exception.GithubRepoError;
+import com.example.taskatipera.exception.GithubRepoException;
 import com.example.taskatipera.model.RepositoryGitHub;
 import com.example.taskatipera.service.ServiceGithub;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,6 @@ public class ControllerGitHub {
     @GetMapping("/{userName}")
     public List<RepositoryGitHub> findAllRepository(@PathVariable("userName")String userName){
         return serviceGithub.findOther(userName)
-                .orElseThrow(()->new RuntimeException());
+                .orElseThrow(()->new GithubRepoException(GithubRepoError.USER_NOT_FOUND));
     }
 }
